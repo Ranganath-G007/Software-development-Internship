@@ -1,1 +1,38 @@
+install :
+npm install socket.io express
 
+//////server Js////
+const express = require("express");
+const app = express();
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
+io.on("connection", socket => {
+  socket.on("typing", data => {
+    socket.broadcast.emit("typing", data);
+  });
+});
+
+server.listen(3000);
+
+
+////index/////
+<textarea id="text" rows="10" cols="50"></textarea>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+let text = document.getElementById("text");
+
+text.addEventListener("keyup", () => {
+  socket.emit("typing", text.value);
+});
+
+socket.on("typing", data => {
+  text.value = data;
+});
+</script>
