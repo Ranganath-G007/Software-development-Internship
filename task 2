@@ -1,1 +1,41 @@
+install :
+npm init -y
+npm install express
 
+
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+let books = [];
+
+// GET
+app.get('/books', (req, res) => {
+  res.json(books);
+});
+
+// POST
+app.post('/books', (req, res) => {
+  books.push(req.body);
+  res.send("Book Added");
+});
+
+// PUT
+app.put('/books/:id', (req, res) => {
+  books[req.params.id] = req.body;
+  res.send("Updated");
+});
+
+// DELETE
+app.delete('/books/:id', (req, res) => {
+  books.splice(req.params.id, 1);
+  res.send("Deleted");
+});
+
+app.listen(3000, () => console.log("Server running"));
+
+
+
+run 
+node server.js
