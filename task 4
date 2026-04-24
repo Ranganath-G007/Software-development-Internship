@@ -1,1 +1,25 @@
+create a file 
+report.md
 
+
+inside report.md
+Refactoring Report
+
+Changes Made:
+- Improved variable naming
+- Replaced loops with modern methods
+- Removed redundant code
+
+Example:
+Before:
+for(i=0;i<arr.length;i++){
+ console.log(arr[i])
+}
+
+After:
+arr.forEach(item => console.log(item))
+
+Impact:
+- Better readability
+- Cleaner code
+- Slight performance improvement
